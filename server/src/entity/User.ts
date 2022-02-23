@@ -1,5 +1,5 @@
 import {Entity ,PrimaryGeneratedColumn, OneToMany ,Column, CreateDateColumn, UpdateDateColumn} from "typeorm";
-import {Content} from './content'
+import {Content} from './Content'
 
 @Entity()
 export class User {
