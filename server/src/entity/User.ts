@@ -22,7 +22,7 @@ export class User {
     @UpdateDateColumn()
     updatedAt!: Date;
 
-    @OneToMany((type)=> Content,(el)=> el.user)
-    content!: Content[]
+    @OneToMany(type=>Content,content=>content.user)
+    contents!: Content[]
 
 }
