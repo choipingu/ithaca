@@ -2,9 +2,9 @@ import styled from 'styled-components';
 import SignUp from './pages/signup';
 import Post from './pages/post';
 import Nav from './components/nav';
+import { Routes, BrowserRouter, Route } from 'react-router-dom'
 const Container = styled.div`
   display: flex;
-  
 
   
 `
@@ -13,13 +13,17 @@ const Container = styled.div`
 
 function App() {
 
-  
-  
+
+
   return (
     <Container>
-      <Nav />
-      <SignUp />
-      <Post />
+      <BrowserRouter>
+        <Nav />
+        <Routes>
+          <Route path='/post' element={<Post />} />
+          <Route path='/signup' element={<SignUp />} />
+        </Routes>
+      </BrowserRouter>
     </Container>
   );
 }
