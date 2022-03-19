@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { faCoffee, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faCoffee, faUser,faLocation } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Container = styled.div`
@@ -31,6 +31,8 @@ const MenuLi = styled.li`
     padding: 8px 12px;
 `
 const Icon = styled.div`
+    display: flex;
+    padding: 8px 12px;
     font-size: 1.5rem;
 `
 function Nav() {
@@ -46,7 +48,10 @@ function Nav() {
                 <MenuLi><Link to='/signup'>SignUp</Link></MenuLi>
                 <MenuLi><Link to='/post'>Post</Link></MenuLi>
             </Menu>
-            <Icon><FontAwesomeIcon icon={faUser} color='white' /></Icon>
+            <Icon>
+                <FontAwesomeIcon icon={faUser} color='white' />
+                <FontAwesomeIcon icon={faLocation} color='white' />
+            </Icon>
         </Container>
     )
 }
