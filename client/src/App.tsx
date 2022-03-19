@@ -4,7 +4,7 @@ import Post from './pages/post';
 import Nav from './components/nav';
 import { Routes, BrowserRouter, Route } from 'react-router-dom'
 const Container = styled.div`
-  display: flex;
+  
 
   
 `
