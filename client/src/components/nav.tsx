@@ -1,21 +1,19 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { faCoffee, faUser,faLocation } from '@fortawesome/free-solid-svg-icons'
+import { faCoffee, faUser, faRightToBracket } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Container = styled.div`
     display: flex;
-    top:0;
-    left: 0;
-    right: 0;
     width: 100%;
-    justify-content: space-between;
+    height: 70px;
+    justify-content: space-around;
     align-items: center;
-    background-color: #263343;
+    background-color: #2e4361;
 `
 const Logo = styled.div`
     font-size: 1.5rem;
-    margin-left: 20px;
+    
     :hover{
         cursor: pointer;
     }
@@ -30,27 +28,30 @@ const MenuLi = styled.li`
     font-size: 1.2rem;
     padding: 8px 12px;
 `
-const Icon = styled.div`
+const Icon = styled.ul`
     display: flex;
+    font-size: 1.5rem;    
     padding: 8px 12px;
-    font-size: 1.5rem;
 `
+const IconLi = styled.li`
+    font-size: 1.2rem;
+    padding: 8px 12px;
+`
+
 function Nav() {
 
-    const home = () => {
-        alert('home')
-    }
+
 
     return (
         <Container>
-            <Logo><FontAwesomeIcon icon={faCoffee} color='white' onClick={home} /></Logo>
+            <Link to='/'><Logo><FontAwesomeIcon icon={faCoffee} color='white' /></Logo></Link>
             <Menu>
                 <MenuLi><Link to='/signup'>SignUp</Link></MenuLi>
                 <MenuLi><Link to='/post'>Post</Link></MenuLi>
             </Menu>
             <Icon>
-                <FontAwesomeIcon icon={faUser} color='white' />
-                <FontAwesomeIcon icon={faLocation} color='white' />
+                <IconLi><Link to='login'><FontAwesomeIcon icon={faRightToBracket} color='white' /></Link></IconLi>
+                <IconLi><Link to='/mypage'><FontAwesomeIcon icon={faUser} color='white' /></Link></IconLi>
             </Icon>
         </Container>
     )
