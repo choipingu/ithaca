@@ -1,6 +1,18 @@
-function Main (){
+import styled from "styled-components"
+
+const Container = styled.div`
+    flex: 1;
+`
+
+function Main() {
+
+
+
     return (
-        <div>main</div>
+        <>
+            <Container>main</Container>
+            
+        </>
     )
 }
 
