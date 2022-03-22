@@ -25,16 +25,7 @@ app.use(
 app.get('/', (req: Request, res: Response) => {
   res.status(200).send('welcome!');
 });
-app.post('/signup',async (req: Request, res: Response)=>{
-  const {email,nickname,password}=req.body
-  const userRepo = getRepository(User)
-  const user=new User()
-  user.email=email
-  user.nickname=nickname
-  user.password=password
-  await userRepo.save(user)
-  res.status(201).json({message:'ok'})
-})
+
 
 app.post('/content',async (req: Request, res: Response)=>{
   const {title,main,userId}=req.body
@@ -60,6 +51,7 @@ app.get('/join',async(req:Request,res:Response)=>{
   res.status(200).json({data:userinfo,message:'ok'})
 })
 
+app.use('/user')
 
 app.get('/user',async (req:Request,res:Response)=>{
   const userinfo1= await getRepository(User)
