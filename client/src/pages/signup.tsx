@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import axios from 'axios'
+import {URL} from '../url'
 
 function SignUp() {
     const [info,setInfo] = useState({
@@ -23,14 +24,14 @@ function SignUp() {
         }
     }
     const submitSign =async()=>{
-        await axios.post(`${URL}/signup`,info,config)
+        await axios.post(`${URL}/user/signup`,info,config)
      }
     return (
         <div>
             <div>SignUp</div>
             <input placeholder="email" value={info.email} onChange={onChange}></input>
-            <input placeholder="nickname" value={info.nickname} onChange={onChange}></input>
-            <input placeholder="password" value={info.password} onChange={onChange}></input>
+            <input placeholder="nickname" type='text' value={info.nickname} onChange={onChange}></input>
+            <input placeholder="password" type='password' value={info.password} onChange={onChange}></input>
             <button onClick={submitSign}>signup!</button>
         </div>
 
