@@ -5,7 +5,7 @@ import Login from '../controllers/login';
 
 const Router = express.Router()
 
-Router.get('/',GetUser)
+Router.get('/getuser',GetUser)
 Router.get('/login',Login)
 Router.post('/signup',SignUp)
 
