@@ -8,9 +8,10 @@ import Login from './pages/login';
 import Footer from './components/footer';
 import { Routes, BrowserRouter, Route } from 'react-router-dom'
 const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 94.6vh;
+    background: #ddd;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
   
 `
 
@@ -22,7 +23,7 @@ function App() {
   return (
     <BrowserRouter>
       <Container>
-      <Nav />
+        <Nav />
         <Routes>
           <Route path='/' element={<Main />} />
           <Route path='/mypage' element={<Mypage />} />
