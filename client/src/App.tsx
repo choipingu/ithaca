@@ -8,13 +8,11 @@ import Login from './pages/login';
 import Footer from './components/footer';
 import { Routes, BrowserRouter, Route } from 'react-router-dom'
 const Container = styled.div`
-  min-height: 100vh;
-  width: 100%;
-  position: relative;
+  display: flex;
   flex-direction: column;
+  height: 94.6vh;
   
 `
-//have to study flex
 
 
 function App() {
@@ -22,22 +20,19 @@ function App() {
 
 
   return (
-    <>
-      <BrowserRouter>
-        <Nav />
-        <Container>
-          <Routes>
-            <Route path='/' element={<Main />} />
-            <Route path='/mypage' element={<Mypage />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/post' element={<Post />} />
-            <Route path='/signup' element={<SignUp />} />
-          </Routes>
-        </Container>
-        <Footer />
-      </BrowserRouter>
-    </>
-
+    <BrowserRouter>
+      <Container>
+      <Nav />
+        <Routes>
+          <Route path='/' element={<Main />} />
+          <Route path='/mypage' element={<Mypage />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/post' element={<Post />} />
+          <Route path='/signup' element={<SignUp />} />
+        </Routes>
+      </Container>
+      <Footer />
+    </BrowserRouter>
   );
 }
 
