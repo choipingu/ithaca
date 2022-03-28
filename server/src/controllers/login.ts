@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createQueryBuilder, getRepository, getConnection, MetadataAlreadyExistsError } from "typeorm";
+import {  getRepository } from "typeorm";
 import { User } from '../entity/User';
 
 
