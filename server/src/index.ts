@@ -1,11 +1,15 @@
+import 'dotenv/config';
 import express, { Request, Response } from 'express';
 import "reflect-metadata";
-import {createConnection ,Connection,createQueryBuilder,getRepository} from "typeorm";
+import {createConnection } from "typeorm";
 import cors from "cors";
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan'
 import UserRouter from './routers/user'
 import ContentRouter from './routers/content'
+import dotenv from "dotenv";
+import path from "path";
+
 
 
 const app = express();

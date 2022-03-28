@@ -9,6 +9,7 @@ const GetUser = async (req: Request, res: Response) => {
         .where("user.id = :id", { id: 1 })
         .getOne();
     res.status(200).json({ data: userinfo1, message: 'ok' })
+    
 }
 
 export default GetUser
