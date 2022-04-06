@@ -7,4 +7,7 @@ export class UsersService {
     getAllUsers(){
         return this.users
     }
+    addUsers(){
+        return this.users.push('pingu')
+    }
 }
