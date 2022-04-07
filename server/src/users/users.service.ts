@@ -2,12 +2,12 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class UsersService {
-    private users = []
+    private users = ['pingu','pep']
 
     getAllUsers(){
         return this.users
     }
     addUsers(){
-        return this.users.push('pingu')
+        return this.users.push()
     }
 }
