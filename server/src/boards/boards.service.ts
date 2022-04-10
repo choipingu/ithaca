@@ -9,11 +9,11 @@ import { CreateBoardDto } from './dto/create-board.dto';
 export class BoardsService {
     private boards:Board[] = [] //private를 사용한 이유는 다른 컴포넌트에서 수정을 할수 있기 때문에 차단하기 위해 사용
 
-    getAllBoards(): Board[]{
+    getAllBoards(): Board[]{ // 모든 게시물 가져오기
         return this.boards
     }
 
-    createBoard(createBoardDto : CreateBoardDto){
+    createBoard(createBoardDto : CreateBoardDto){ // 게시물 생성
         const {title, description} = createBoardDto
         const board :Board= {
             id: uuid(),
@@ -24,7 +24,7 @@ export class BoardsService {
         this.boards.push(board)
         return board
     }
-    getBoardById(id:string): Board{
+    getBoardById(id:string): Board{ //특정 게시물 찾기
         const found = this.boards.find((board)=> board.id ===id)
 
         if(!found){
@@ -32,10 +32,11 @@ export class BoardsService {
         }
         return found
     }
-    deleteBoard(id:string):void{
-        this.boards=this.boards.filter((board)=> board.id !== id)
+    deleteBoard(id:string):void{ // 특정 게시물 삭제
+        const found = this.getBoardById(id)
+        this.boards=this.boards.filter((board)=> board.id !== found.id)
     }
-    updateBoardStatus(id: string , status: BoardStatus): Board{
+    updateBoardStatus(id: string , status: BoardStatus): Board{ // 게시물 상태 업데이트
         const board = this.getBoardById(id)
         board.status=status
         return board
