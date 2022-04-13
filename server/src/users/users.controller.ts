@@ -1,5 +1,6 @@
 import { Body, Controller, Get, Param, Patch, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
+import { UserStatusValidationPipe } from './pipes/user-status-validation.pipe';
 import { User, UserStatus } from './user.model';
 import { UsersService } from './users.service';
 
@@ -18,10 +19,15 @@ export class UsersController {
     ): User {
         return this.usersService.createUser(createUserDto)
     }
-    @Patch('/:id')
+    @Get('/:id')
+    getUserById(@Param('id') id:string):User{
+        return this.usersService.getUserById(id)
+    }
+
+    @Patch('/:id/status')
     updateUserStatus(
         @Param('id') id:string,
-        @Body('status') status: UserStatus
+        @Body('status', UserStatusValidationPipe) status: UserStatus
     ) {
         return this.usersService.updateUserStatus(id,status)
     }

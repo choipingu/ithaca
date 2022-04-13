@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { v1 as uuid } from 'uuid'
 import { CreateUserDto } from './dto/create-user.dto';
 import { User, UserStatus } from './user.model';
@@ -7,10 +7,10 @@ import { User, UserStatus } from './user.model';
 export class UsersService {
     private users = []
 
-    getAllUsers():User[]{
+    getAllUsers():User[]{  // 모든 유저 가져오기
         return this.users
     }
-    createUser(createUserDto: CreateUserDto){
+    createUser(createUserDto: CreateUserDto){ // 유저 생성하기
         const {nickname,password} = createUserDto
         const user = {
             id: uuid(),
@@ -21,7 +21,16 @@ export class UsersService {
         this.users.push(user)
         return user
     }
-    updateUserStatus(id:string,status:UserStatus){
-        
+    getUserById(id:string): User{
+        const found = this.users.find((user)=>user.id === id)
+        if(!found) {
+            throw new NotFoundException(`Can't find Board with id ${id}`)
+        }
+        return found
+    }
+    updateUserStatus(id:string,status:UserStatus){ // 유저 상태 업데이트
+        const user = this.getUserById(id)
+        user.status = status
+        return user
     }
 }
