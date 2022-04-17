@@ -4,7 +4,7 @@ import { v1 as uuid} from 'uuid' // 데이터베이스에서는 자동으로 유
 import { CreateBoardDto } from './dto/create-board.dto';
 import { BoardRepository } from './board.repository';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Board } from './board.entitiy';
+import { Board } from './board.entity';
 
 // nset g service boards --no-spec
 // Injectable 를 사용하게 되면 에플리케이션 전체에서 사용될수 있음 예를들어 컨트롤 A에서 사용되던 서비스를 컨트롤 B에도 같은 서비스를 사용할수 있게 한다
@@ -19,17 +19,9 @@ export class BoardsService {
     //     return this.boards
     // }
 
-    // createBoard(createBoardDto : CreateBoardDto){ // 게시물 생성
-    //     const {title, description} = createBoardDto
-    //     const board :Board= {
-    //         id: uuid(),
-    //         title,
-    //         description,
-    //         status: BoardStatus.PUBLIC
-    //     }
-    //     this.boards.push(board)
-    //     return board
-    // }
+    createBoard(createBoardDto : CreateBoardDto): Promise<Board>{ // 게시물 생성
+        return this.boardRepository.createBoard(createBoardDto)
+    }
     async getBoardById(id:number): Promise <Board>{ //특정 게시물 찾기
         const found = await this.boardRepository.findOne(id)
 
