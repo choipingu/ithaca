@@ -1,12 +1,14 @@
+import dotenv from 'dotenv'
+dotenv.config()
 import { TypeOrmModuleOptions } from "@nestjs/typeorm";
 
 export const typeORMConfig : TypeOrmModuleOptions ={
-    type: 'postgres',
-    host: 'localhost',
-    port: 5432,
-    username:'postgres',
-    password:'1234',
-    database:'ithaca',
+    type: 'mysql',
+    host: process.env.DATABASE_HOST,
+    port: 3306,
+    username:process.env.DATABASE_USERNAME,
+    password:process.env.DATABASE_PASSWORD,
+    database:process.env.DATABASE_NAME,
     entities:[__dirname + '/../**/*.entity.{js,ts}'],
     synchronize: true
 }

@@ -15,29 +15,20 @@ export class BoardsService {
         private boardRepository: BoardRepository
         ){}
 
-    // getAllBoards(): Board[]{ // 모든 게시물 가져오기
-    //     return this.boards
-    // }
+    async getAllBoards(): Promise<Board[]>{ // 모든 게시물 가져오기
+        return await this.boardRepository.find()
+    }
 
     createBoard(createBoardDto : CreateBoardDto): Promise<Board>{ // 게시물 생성
         return this.boardRepository.createBoard(createBoardDto)
     }
-    async getBoardById(id:number): Promise <Board>{ //특정 게시물 찾기
-        const found = await this.boardRepository.findOne(id)
-
-        if(!found){
-            throw new NotFoundException(`Can't find Board with id ${id}`)
-        }
-        return found
+    getBoardById(id:number): Promise <Board>{ //특정 게시물 찾기
+        return this.boardRepository.getBoardById(id)       
     }
-    // deleteBoard(id:string):void{ // 특정 게시물 삭제
-    //     const found = this.getBoardById(id)
-    //     this.boards=this.boards.filter((board)=> board.id !== found.id)
-    // }
-    // updateBoardStatus(id: string , status: BoardStatus): Board{ // 게시물 상태 업데이트
-    //     const board = this.getBoardById(id)
-    //     board.status=status
-    //     return board
-
-    // }
+    deleteBoard(id:number): Promise <void>{ // 특정 게시물 삭제
+        return this.boardRepository.deleteBoard(id)
+    }
+    updateBoardStatus(id: number , status: BoardStatus): Promise<Board>{ // 게시물 상태 업데이트
+        return this.boardRepository.updateBoardStatus(id,status)
+    }
 }
