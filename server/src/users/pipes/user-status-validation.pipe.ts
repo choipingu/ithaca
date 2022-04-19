@@ -1,5 +1,5 @@
 import { BadRequestException, PipeTransform } from "@nestjs/common";
-import { UserStatus } from "../user.model";
+import { UserStatus } from "../user-status-validation";
 
 
 export class UserStatusValidationPipe implements PipeTransform{
