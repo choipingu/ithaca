@@ -11,6 +11,9 @@ export class Board extends BaseEntity{
     
     @Column()
     description:string;
+
+    @Column()
+    tag:string;
     
     @Column()
     status: BoardStatus;
