@@ -26,7 +26,7 @@ export class UserRepository extends Repository<User> {
         }
         return found
     }
-    async deleteUser(id:number): Promise<void>{
+    async deleteUser(id:number): Promise<void>{ // 
         const result = await this.delete(id)
 
         if(result.affected === 0 ){

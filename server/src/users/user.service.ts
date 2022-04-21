@@ -23,7 +23,7 @@ export class UsersService {
         return this.userRepository.getUserById(id)
     }
 
-    deleteUser(id:number): Promise<void> {
+    deleteUser(id:number): Promise<void> { // 특정 유저 삭제
         return this.userRepository.deleteUser(id)
     }
 
