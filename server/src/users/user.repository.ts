@@ -8,7 +8,7 @@ import { User } from "./user.entity";
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
 
-    async createUser(createUserDto:CreateUserDto) : Promise <User> {
+    async createUser(createUserDto:CreateUserDto) : Promise <User> { // 유저 추가
         const { nickname,username,password } = createUserDto
         const user = this.create({
             nickname,
@@ -26,7 +26,7 @@ export class UserRepository extends Repository<User> {
         }
         return found
     }
-    async deleteUser(id:number): Promise<void>{ // 
+    async deleteUser(id:number): Promise<void>{ // 특정 유저 삭제
         const result = await this.delete(id)
 
         if(result.affected === 0 ){
