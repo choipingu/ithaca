@@ -8,7 +8,7 @@ export class User extends BaseEntity{
     id:number;
 
     @Column()
-    username:string;
+    userid:string;
 
     @Column()
     nickname:string;

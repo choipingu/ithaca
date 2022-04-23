@@ -6,7 +6,7 @@ import { CreateBoardDto } from './dto/create-board.dto';
 import { BoardStatusValidationPipe } from './pipes/board-status-validation.pipe';
 
 // nest g controller boards --no-spec
-@Controller('boards')
+@Controller('board')
 export class BoardsController {
     constructor(private boardsService: BoardsService) { }
 
