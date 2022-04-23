@@ -5,7 +5,7 @@ import { User } from './user.entity';
 import { UserStatus } from './user-status-validation';
 import { UsersService } from './user.service';
 
-@Controller('users')
+@Controller('user')
 export class UsersController {
     constructor(private usersService: UsersService) { }
 
@@ -14,7 +14,7 @@ export class UsersController {
         return this.usersService.getAllUsers()
     }
 
-    @Post() // 유저 생성하기
+    @Post('/signup') // 유저 생성하기
     @UsePipes(ValidationPipe)
     createUser(
         @Body() createUserDto: CreateUserDto
