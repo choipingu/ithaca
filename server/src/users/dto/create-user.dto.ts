@@ -1,13 +1,25 @@
-import { IsNotEmpty } from "class-validator"
+import { IsNotEmpty, IsString, Matches, MaxLength, MinLength } from "class-validator"
 
 export class CreateUserDto {
     @IsNotEmpty()
+    @IsString()
+    @MinLength(6)
+    @MaxLength(20)
     userid: string
     
     @IsNotEmpty()
+    @IsString()
+    @MinLength(6)
+    @MaxLength(20)
     nickname: string
     
     @IsNotEmpty()
+    @IsString()
+    @MinLength(6)
+    @MaxLength(20)
+    @Matches(/^[a-zA-Z0-9]*$/,{
+        message: 'password only accepts english and number'
+    })
     password: string
 }
 
