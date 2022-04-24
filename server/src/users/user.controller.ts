@@ -15,9 +15,8 @@ export class UsersController {
     }
 
     @Post('/signup') // 유저 생성하기
-    @UsePipes(ValidationPipe)
     createUser(
-        @Body() createUserDto: CreateUserDto
+        @Body(ValidationPipe) createUserDto: CreateUserDto
     ): Promise <User> {
         return this.usersService.createUser(createUserDto)
     }
