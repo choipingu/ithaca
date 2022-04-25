@@ -9,7 +9,7 @@ export class CreateUserDto {
     
     @IsNotEmpty()
     @IsString()
-    @MinLength(6)
+    @MinLength(4)
     @MaxLength(20)
     nickname: string
     
