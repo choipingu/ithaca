@@ -1,4 +1,4 @@
-import { NotFoundException } from "@nestjs/common";
+import { ConflictException, InternalServerErrorException, NotFoundException } from "@nestjs/common";
 import { EntityRepository, Repository } from "typeorm";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UserStatus } from "./user-status-validation";
@@ -10,14 +10,24 @@ export class UserRepository extends Repository<User> {
 
     async createUser(createUserDto:CreateUserDto) : Promise <User> { // 유저 추가
         const { nickname,userid,password } = createUserDto
-        const user = this.create({
-            nickname,
-            password,
-            userid,
-            status: UserStatus.ACTIVE
-        })
-        await this.save(user)
-        return user
+        
+        try{
+            const user = this.create({
+                nickname,
+                password,
+                userid,
+                status: UserStatus.ACTIVE
+            })
+            await this.save(user)
+            return user
+        } catch (err) {
+            console.log(err)
+            if(err.code==='23505'){
+                throw new ConflictException('Existing userid')
+            } else {
+                throw new InternalServerErrorException()
+            }
+        }
     }
     async getUserById(id:number): Promise<User>{ //특정 유저 찾기
         const found = await this.findOne(id)

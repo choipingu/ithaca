@@ -1,8 +1,9 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, Unique } from "typeorm";
 import { UserStatus } from "./user-status-validation";
 
 
 @Entity()
+@Unique(['userid'])
 export class User extends BaseEntity{
     @PrimaryGeneratedColumn()
     id:number;
