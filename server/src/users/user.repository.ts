@@ -3,21 +3,23 @@ import { EntityRepository, Repository } from "typeorm";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UserStatus } from "./user-status-validation";
 import { User } from "./user.entity";
-
+import * as bcrypt from 'bcryptjs'
 
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
 
     async createUser(createUserDto:CreateUserDto) : Promise <User> { // 유저 추가
         const { nickname,userid,password } = createUserDto
+        const salt = await bcrypt.genSalt()
+        const hashedPassword = await bcrypt.hash(password,salt)
+        const user = this.create({
+            nickname,
+            password:hashedPassword,
+            userid,
+            status: UserStatus.ACTIVE
+        })
         
         try{
-            const user = this.create({
-                nickname,
-                password,
-                userid,
-                status: UserStatus.ACTIVE
-            })
             await this.save(user)
             return user
         } catch (err) {
