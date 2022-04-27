@@ -9,7 +9,7 @@ import { Board } from './board.entity';
 // nset g service boards --no-spec
 // Injectable 를 사용하게 되면 에플리케이션 전체에서 사용될수 있음 예를들어 컨트롤 A에서 사용되던 서비스를 컨트롤 B에도 같은 서비스를 사용할수 있게 한다
 @Injectable()
-export class BoardsService {
+export class BoardService {
     constructor(
         @InjectRepository(BoardRepository)
         private boardRepository: BoardRepository

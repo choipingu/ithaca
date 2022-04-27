@@ -7,7 +7,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { UserRepository } from './user.repository';
 
 @Injectable()
-export class UsersService {
+export class UserService {
     constructor(
         @InjectRepository(UserRepository)
         private userRepository: UserRepository
@@ -16,8 +16,8 @@ export class UsersService {
     async getAllUsers():Promise<User[]>{  // 모든 유저 가져오기
         return await this.userRepository.find()
     }
-    createUser(createUserDto: CreateUserDto): Promise<User>{ // 유저 생성하기
-        return this.userRepository.createUser(createUserDto)
+    signUp(createUserDto: CreateUserDto): Promise<User>{ // 유저 생성하기
+        return this.userRepository.signUp(createUserDto)
     }
     getUserById(id:number): Promise<User>{ //특정 유저 찾기
         return this.userRepository.getUserById(id)
@@ -29,5 +29,9 @@ export class UsersService {
 
     updateUserStatus(id:number,status:UserStatus):Promise<User>{ // 유저 상태 업데이트
         return this.userRepository.updateUserStatus(id,status)
+    }
+
+    signIn(createUserDto:CreateUserDto): Promise<string>{
+        return this.userRepository.signIn(createUserDto)
     }
 }

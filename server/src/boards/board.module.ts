@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { BoardRepository } from './board.repository';
-import { BoardsController } from './board.controller';
-import { BoardsService } from './board.service';
+import { BoardController } from './board.controller';
+import { BoardService } from './board.service';
 
 // nest g module boards --no-spec
 //nest : using nestcli
@@ -12,7 +12,7 @@ import { BoardsService } from './board.service';
   imports: [
     TypeOrmModule.forFeature([BoardRepository])
   ],
-  controllers: [BoardsController],
-  providers: [BoardsService]
+  controllers: [BoardController],
+  providers: [BoardService]
 })
-export class BoardsModule {}
+export class BoardModule {}
