@@ -1,18 +1,18 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 import { BoardStatus } from './board-status.enum';
 import { Board } from './board.entity';
-import { BoardsService } from './board.service';
+import { BoardService } from './board.service';
 import { CreateBoardDto } from './dto/create-board.dto';
 import { BoardStatusValidationPipe } from './pipes/board-status-validation.pipe';
 
 // nest g controller boards --no-spec
 @Controller('board')
-export class BoardsController {
-    constructor(private boardsService: BoardsService) { }
+export class BoardController {
+    constructor(private boardService: BoardService) { }
 
     @Get() // 모든 게시물 가져오기
     getAllBoard(): Promise<Board[]> {
-        return this.boardsService.getAllBoards()
+        return this.boardService.getAllBoards()
     }
 
     @Post() //게시물 생성
@@ -20,17 +20,17 @@ export class BoardsController {
     createBoard(
         @Body() createBoardDto: CreateBoardDto
     ): Promise<Board> {
-        return this.boardsService.createBoard(createBoardDto)
+        return this.boardService.createBoard(createBoardDto)
     }
 
     @Get('/:id') //특정 게시물 가져오기
     getBoardById(@Param('id') id: number): Promise<Board> {
-        return this.boardsService.getBoardById(id)
+        return this.boardService.getBoardById(id)
     }
 
     @Delete('/:id') //특정 게시물 삭제하기
     deleteBoard(@Param('id', ParseIntPipe) id:number): Promise<void> {
-        return this.boardsService.deleteBoard(id)
+        return this.boardService.deleteBoard(id)
     }
 
     @Patch('/:id/status') // 게시물 상태 업데이트하기
@@ -38,7 +38,7 @@ export class BoardsController {
         @Param('id', ParseIntPipe) id:number,
         @Body('status', BoardStatusValidationPipe) status: BoardStatus
     ) {
-        return this.boardsService.updateBoardStatus(id,status)
+        return this.boardService.updateBoardStatus(id,status)
     }
 
 }

@@ -1,14 +1,15 @@
-import { ConflictException, InternalServerErrorException, NotFoundException } from "@nestjs/common";
+import { ConflictException, InternalServerErrorException, NotFoundException, UnauthorizedException } from "@nestjs/common";
 import { EntityRepository, Repository } from "typeorm";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UserStatus } from "./user-status-validation";
 import { User } from "./user.entity";
 import * as bcrypt from 'bcryptjs'
 
+
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
 
-    async createUser(createUserDto:CreateUserDto) : Promise <User> { // 유저 추가
+    async signUp(createUserDto:CreateUserDto) : Promise <User> { // 유저 추가
         const { nickname,userid,password } = createUserDto
         const salt = await bcrypt.genSalt()
         const hashedPassword = await bcrypt.hash(password,salt)
@@ -50,5 +51,15 @@ export class UserRepository extends Repository<User> {
         user.status=status
         await this.save(user)
         return user
+    }
+    async signIn(createUserDto:CreateUserDto): Promise<string>{
+        const { userid, password } = createUserDto
+        const user = await this.findOne({ userid })
+
+        if(user && (await bcrypt.compare(password, user.password ))){
+            return 'login success'
+        } else {
+            throw new UnauthorizedException('login failed')
+        }
     }
 }
