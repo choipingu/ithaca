@@ -1,13 +1,15 @@
 import { ConflictException, InternalServerErrorException, NotFoundException, UnauthorizedException } from "@nestjs/common";
 import { EntityRepository, Repository } from "typeorm";
-import { CreateUserDto } from "./dto/create-user.dto";
+import { CreateUserDto, UserLoginDto } from "./dto/user.dto";
 import { UserStatus } from "./user-status-validation";
 import { User } from "./user.entity";
 import * as bcrypt from 'bcryptjs'
+import { JwtService } from "@nestjs/jwt";
 
 
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
+    private jwtService: JwtService;
 
     async signUp(createUserDto:CreateUserDto) : Promise <User> { // 유저 추가
         const { nickname,userid,password } = createUserDto
@@ -52,14 +54,17 @@ export class UserRepository extends Repository<User> {
         await this.save(user)
         return user
     }
-    async signIn(createUserDto:CreateUserDto): Promise<string>{
-        const { userid, password } = createUserDto
-        const user = await this.findOne({ userid })
+    // async signIn(userLoginDto:UserLoginDto): Promise<{accessToken:string}>{
+    //     const { userid, password } = userLoginDto
+    //     const user = await this.findOne({ userid })
 
-        if(user && (await bcrypt.compare(password, user.password ))){
-            return 'login success'
-        } else {
-            throw new UnauthorizedException('login failed')
-        }
-    }
+    //     if(user && (await bcrypt.compare(password, user.password ))){
+
+    //         const payload={userid}
+    //         const accessToken= await this.jwtService.sign(payload)
+    //         return {accessToken:accessToken}
+    //     } else {
+    //         throw new UnauthorizedException('login failed')
+    //     }
+    // }
 }

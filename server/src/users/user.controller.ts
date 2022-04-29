@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Res, UsePipes, ValidationPipe } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
+import { CreateUserDto, UserLoginDto } from './dto/user.dto';
 import { UserStatusValidationPipe } from './pipes/user-status-validation.pipe';
 import { User } from './user.entity';
 import { UserStatus } from './user-status-validation';
@@ -40,7 +40,7 @@ export class UserController {
     }
 
     @Post('signin') // 유저 로그인
-    signIn(@Body(ValidationPipe) createUserDto:CreateUserDto){
-        return this.userService.signIn(createUserDto)
+    signIn(@Body(ValidationPipe) userLoginDto:UserLoginDto): Promise<{accessToken:string}>{
+        return this.userService.signIn(userLoginDto)
     }
 }
