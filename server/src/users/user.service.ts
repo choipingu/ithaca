@@ -1,16 +1,18 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { v1 as uuid } from 'uuid'
-import { CreateUserDto } from './dto/create-user.dto';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { CreateUserDto, UserLoginDto } from './dto/user.dto';
 import { User } from './user.entity';
 import { UserStatus } from './user-status-validation';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserRepository } from './user.repository';
+import { JwtService } from '@nestjs/jwt';
+import * as bcrypt from 'bcryptjs'
 
 @Injectable()
 export class UserService {
     constructor(
         @InjectRepository(UserRepository)
-        private userRepository: UserRepository
+        private userRepository: UserRepository,
+        private jwtService:JwtService
         ){}
 
     async getAllUsers():Promise<User[]>{  // 모든 유저 가져오기
@@ -31,7 +33,18 @@ export class UserService {
         return this.userRepository.updateUserStatus(id,status)
     }
 
-    signIn(createUserDto:CreateUserDto): Promise<string>{
-        return this.userRepository.signIn(createUserDto)
+    async signIn(userLoginDto:UserLoginDto): Promise<{accessToken:string}>{
+        const { userid, password } = userLoginDto
+        const user = await this.userRepository.findOne({ userid })
+
+        if(user && (await bcrypt.compare(password, user.password ))){
+
+            const payload={userid}
+            const accessToken= await this.jwtService.sign(payload)
+            return {accessToken:accessToken}
+        } else {
+            throw new UnauthorizedException('login failed')
+        }
+        // return this.userRepository.signIn(userLoginDto)
     }
 }
