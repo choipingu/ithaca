@@ -1,9 +1,10 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Res, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Req, Res, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { CreateUserDto, UserLoginDto } from './dto/user.dto';
 import { UserStatusValidationPipe } from './pipes/user-status-validation.pipe';
 import { User } from './user.entity';
 import { UserStatus } from './user-status-validation';
 import { UserService } from './user.service';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('user')
 export class UserController {
@@ -39,8 +40,14 @@ export class UserController {
         return this.userService.updateUserStatus(id,status)
     }
 
-    @Post('signin') // 유저 로그인
+    @Post('/signin') // 유저 로그인
     signIn(@Body(ValidationPipe) userLoginDto:UserLoginDto): Promise<{accessToken:string}>{
         return this.userService.signIn(userLoginDto)
     }
+    @Post('/test')
+    @UseGuards(AuthGuard())
+    test(@Req() req){
+        console.log('req',req)
+    }
 }
+//@UseGuards(AuthGuard())
