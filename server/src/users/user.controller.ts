@@ -5,6 +5,7 @@ import { User } from './user.entity';
 import { UserStatus } from './user-status-validation';
 import { UserService } from './user.service';
 import { AuthGuard } from '@nestjs/passport';
+import { GetUser } from './get-user.decorator';
 
 @Controller('user')
 export class UserController {
@@ -46,8 +47,8 @@ export class UserController {
     }
     @Post('/test')
     @UseGuards(AuthGuard())
-    test(@Req() req){
-        console.log('req',req)
+    test(@GetUser() user: User){
+        console.log('user',user)
     }
 }
 //@UseGuards(AuthGuard())
