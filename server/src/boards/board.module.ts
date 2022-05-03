@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { BoardRepository } from './board.repository';
 import { BoardController } from './board.controller';
 import { BoardService } from './board.service';
+import { UserModule } from 'src/users/user.module';
 
 // nest g module boards --no-spec
 //nest : using nestcli
@@ -10,7 +11,8 @@ import { BoardService } from './board.service';
 //--no-spec : 테스트 코드 생성 안함
 @Module({
   imports: [
-    TypeOrmModule.forFeature([BoardRepository])
+    TypeOrmModule.forFeature([BoardRepository]),
+    UserModule
   ],
   controllers: [BoardController],
   providers: [BoardService]
