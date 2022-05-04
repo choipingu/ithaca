@@ -16,8 +16,11 @@ export class BoardService {
         private boardRepository: BoardRepository
         ){}
 
-    async getAllBoards(): Promise<Board[]>{ // 모든 게시물 가져오기
-        return await this.boardRepository.find()
+    async getAllBoards(user:User): Promise<Board[]>{ // 모든 게시물 가져오기
+        const query = this.boardRepository.createQueryBuilder('board')
+        query.where('board.userId= :userId',{userId:user.id}) // (찾을내용,{찾는 값})
+        const board = await query.getMany()
+        return board
     }
 
     createBoard(createBoardDto : CreateBoardDto, user:User): Promise<Board>{ // 게시물 생성
