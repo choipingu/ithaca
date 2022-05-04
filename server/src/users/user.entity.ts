@@ -1,4 +1,5 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, Unique } from "typeorm";
+import { Board } from "src/boards/board.entity";
+import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn, Unique } from "typeorm";
 import { UserStatus } from "./user-status-validation";
 
 
@@ -19,4 +20,7 @@ export class User extends BaseEntity{
     
     @Column()
     status: UserStatus;
+
+    @OneToMany(type => Board, board=>board.user, {eager: true})
+    board: Board[]
 }
