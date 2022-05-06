@@ -36,8 +36,11 @@ export class BoardController {
     }
 
     @Delete('/:id') //특정 게시물 삭제하기
-    deleteBoard(@Param('id', ParseIntPipe) id:number): Promise<void> {
-        return this.boardService.deleteBoard(id)
+    deleteBoard(
+        @Param('id', ParseIntPipe) id:number,
+        @GetUser() user:User
+        ): Promise<void> {
+        return this.boardService.deleteBoard(id,user)
     }
 
     @Patch('/:id/status') // 게시물 상태 업데이트하기

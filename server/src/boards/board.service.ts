@@ -29,8 +29,8 @@ export class BoardService {
     getBoardById(id:number): Promise <Board>{ //특정 게시물 찾기
         return this.boardRepository.getBoardById(id)       
     }
-    deleteBoard(id:number): Promise <void>{ // 특정 게시물 삭제
-        return this.boardRepository.deleteBoard(id)
+    deleteBoard(id:number,user:User): Promise <void>{ // 특정 게시물 삭제
+        return this.boardRepository.deleteBoard(id,user)
     }
     updateBoardStatus(id: number , status: BoardStatus): Promise<Board>{ // 게시물 상태 업데이트
         return this.boardRepository.updateBoardStatus(id,status)
