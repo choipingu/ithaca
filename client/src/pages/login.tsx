@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import styled from 'styled-components';
 
+
 const LoginWrap = styled.div`
   display: flex;
   justify-content: center;
@@ -154,7 +155,7 @@ function Login () {
   return (
     <LoginWrap>
       <LoginContainer>
-        <img src='/images/logo.png' alt='logo' className='img' />
+        <img src='img/ithaca.png' alt='logo' className='img' />
         <InputWrap>
           <LoginInput type='email' placeholder='email' onChange={handleInput} />
           <LoginInput type='password' placeholder='password' onChange={handleInput} />
@@ -163,7 +164,7 @@ function Login () {
         <button className='signup' onClick={handleSubmit}>아직 계정이 없습니까?</button>
         <LoginButton className='loginBtn' onClick={handleSubmit}>Login</LoginButton>
         <FloatingText>──────   또는   ──────</FloatingText>
-        <GithubButton className='githubBtn' onClick={handleSubmit}><img src='/images/kakao.png' alt='logo' className='cacao' onClick={handleSubmit} /></GithubButton>
+        <GithubButton className='githubBtn' onClick={handleSubmit}><img src='img/kakao.png' alt='logo' className='cacao' onClick={handleSubmit} /></GithubButton>
       </LoginContainer>
     </LoginWrap>
   );
