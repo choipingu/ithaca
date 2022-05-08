@@ -1,5 +1,4 @@
 import styled from "styled-components"
-
 const Container = styled.div`
     flex: 1;
 `
@@ -10,8 +9,7 @@ function Main() {
 
     return (
         <Container>
-            <div>main</div>
-            
+            <img src='img/ithaca.png' alt='logo' width={1000} />
         </Container>
 
 

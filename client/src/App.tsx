@@ -8,7 +8,7 @@ import Login from './pages/login';
 import Footer from './components/footer';
 import { Routes, BrowserRouter, Route } from 'react-router-dom'
 const Container = styled.div`
-    background: #ddd;
+    background: whitesmoke;
     display: flex;
     flex-direction: column;
     min-height: 100vh;

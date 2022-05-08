@@ -46,8 +46,8 @@ function Nav() {
         <Container>
             <Link to='/'><Logo><FontAwesomeIcon icon={faCoffee} color='white' /></Logo></Link>
             <Menu>
-                <MenuLi><Link to='/signup'>SignUp</Link></MenuLi>
-                <MenuLi><Link to='/post'>Post</Link></MenuLi>
+                <MenuLi><Link to='/signup'>도서목록</Link></MenuLi>
+                <MenuLi><Link to='/post'>문의</Link></MenuLi>
             </Menu>
             <Icon>
                 <IconLi><Link to='login'><FontAwesomeIcon icon={faRightToBracket} color='white' /></Link></IconLi>
