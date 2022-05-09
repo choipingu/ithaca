@@ -106,7 +106,7 @@ const GithubButton = styled.button`
     }
 `;
 
-function Login () {
+function Login() {
   const config = {
     headers: {
       'Content-Type': 'application/json'
@@ -130,13 +130,12 @@ function Login () {
     }
   };
 
-  const handleSubmit = (event:any) => {
+  const handleSubmit = (event: any) => {
     console.log(event.target);
     if (event.target.className.includes('loginBtn')) {
       // axios 성공시
-      axios.post('http://3.15.16.232:8080/login', { email: inputInfo.email, password: inputInfo.password }, config)
+      axios.post('http://localhost:8080/user/signin', { email: inputInfo.email, password: inputInfo.password }, config)
         .then(el => {
-          
           navigate('/');
         });
       // axios 실패시
