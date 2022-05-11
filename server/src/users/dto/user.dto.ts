@@ -6,18 +6,18 @@ export class CreateUserDto {
     @MinLength(6)
     @MaxLength(20)
     userid: string
-    
+
     @IsNotEmpty()
     @IsString()
     @MinLength(4)
     @MaxLength(20)
     nickname: string
-    
+
     @IsNotEmpty()
     @IsString()
     @MinLength(6)
     @MaxLength(20)
-    @Matches(/^[a-zA-Z0-9]*$/,{
+    @Matches(/^[a-zA-Z0-9]*$/, {
         message: 'password only accepts english and number'
     })
     password: string
@@ -28,12 +28,12 @@ export class UserLoginDto {
     @MinLength(6)
     @MaxLength(20)
     userid: string
-    
+
     @IsNotEmpty()
     @IsString()
     @MinLength(6)
     @MaxLength(20)
-    @Matches(/^[a-zA-Z0-9]*$/,{
+    @Matches(/^[a-zA-Z0-9]*$/, {
         message: 'password only accepts english and number'
     })
     password: string
