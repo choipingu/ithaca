@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import styled from 'styled-components';
+import { URL } from '../url'
 
 
 const LoginWrap = styled.div`
@@ -117,13 +118,13 @@ function Login() {
   const navigate = useNavigate();
 
   const [inputInfo, setInputInfo] = useState({
-    email: '',
+    userid: '',
     password: ''
   });
 
   const handleInput = (event: { target: { placeholder: string; value: any; }; }) => {
-    if (event.target.placeholder === 'email') {
-      setInputInfo({ ...inputInfo, email: event.target.value });
+    if (event.target.placeholder === 'userid') {
+      setInputInfo({ ...inputInfo, userid: event.target.value });
     }
     if (event.target.placeholder === 'password') {
       setInputInfo({ ...inputInfo, password: event.target.value });
@@ -133,12 +134,10 @@ function Login() {
   const handleSubmit = (event: any) => {
     console.log(event.target);
     if (event.target.className.includes('loginBtn')) {
-      // axios 성공시
-      axios.post('http://localhost:8080/user/signin', { email: inputInfo.email, password: inputInfo.password }, config)
+      axios.post(`${URL}/user/signin`, { userid: inputInfo.userid, password: inputInfo.password }, config)
         .then(el => {
           navigate('/');
-        });
-      // axios 실패시
+        }).catch(err => console.log(err))
     }
     if (event.target.className.includes('githubBtn')) {
       window.location.assign('https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=da4e288805f2fb1fe0efa41cb629944f&redirect_uri=http://practice-bucket-depolyman1.s3-website.ap-northeast-2.amazonaws.com/callback');
@@ -156,7 +155,7 @@ function Login() {
       <LoginContainer>
         <img src='img/ithaca.png' alt='logo' className='img' />
         <InputWrap>
-          <LoginInput type='email' placeholder='email' onChange={handleInput} />
+          <LoginInput type='text' placeholder='userid' onChange={handleInput} />
           <LoginInput type='password' placeholder='password' onChange={handleInput} />
         </InputWrap>
         <br />
