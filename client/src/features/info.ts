@@ -1,8 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 export interface infoState {
-    parent: string
-    child: string
+    userid: string
     login: boolean
     oauth: boolean
     admin: boolean
@@ -10,8 +9,7 @@ export interface infoState {
 }
 
 const initialState = {
-    parent: '',
-    child: '',
+    userid: '',
     login: false,
     oauth: false,
     admin: false,
@@ -23,10 +21,7 @@ export const info = createSlice({
     initialState,
     reducers: {
         setParent: (state, action: PayloadAction<any>) => {
-            state.parent = action.payload
-        },
-        setChild: (state, action: PayloadAction<any>) => {
-            state.child = action.payload
+            state.userid = action.payload
         },
         setLogin: (state, action: PayloadAction<any>) => {
             state.login = action.payload
@@ -43,6 +38,6 @@ export const info = createSlice({
     },
 })
 
-export const { setParent, setChild, setLogin, setOauth, setNickname, setAdmin } = info.actions
+export const { setParent, setLogin, setOauth, setNickname, setAdmin } = info.actions
 
 export default info.reducer

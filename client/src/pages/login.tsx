@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import styled from 'styled-components';
 import { URL } from '../url'
+import { useAppSelector, useAppDispatch } from '../store/hooks'
+import { setLogin } from '../features/info';
 
 
 const LoginWrap = styled.div`
@@ -116,6 +118,7 @@ function Login() {
   };
 
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const [inputInfo, setInputInfo] = useState({
     userid: '',
@@ -136,6 +139,8 @@ function Login() {
     if (event.target.className.includes('loginBtn')) {
       axios.post(`${URL}/user/signin`, { userid: inputInfo.userid, password: inputInfo.password }, config)
         .then(el => {
+          console.log(el)
+          dispatch(setLogin(true))
           navigate('/');
         }).catch(err => console.log(err))
     }
