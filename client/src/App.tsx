@@ -7,6 +7,14 @@ import Mypage from './pages/mypage';
 import Login from './pages/login';
 import Footer from './components/footer';
 import { Routes, BrowserRouter, Route } from 'react-router-dom'
+import { Cookies } from 'react-cookie';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { URL } from './url';
+import { useAppSelector, useAppDispatch } from './store/hooks'
+import { setAdmin, setLogin, setNickname, setOauth } from './features/info';
+import Loader from './components/loader';
+
 const Container = styled.div`
     background: whitesmoke;
     display: flex;
@@ -17,8 +25,36 @@ const Container = styled.div`
 
 
 function App() {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    withCredentials: true
+  };
+  const cookies = new Cookies();
+  const accessToken = cookies.get("accessToken")
+  const dispatch = useAppDispatch()
+  const [isLoading, setIsLoading] = useState(true);
 
+  useEffect(() => {
+    if (accessToken) {
+      axios.get(`${URL}/user`, config)
+        .then(el => {
+          dispatch(setLogin(true))
+          dispatch(setNickname(el.data.data.nickname))
+          if (el.data.data.kakao) {
+            dispatch(setOauth(true))
+          }
+          if (el.data.data.admin) {
+            dispatch(setAdmin(true))
+          }
+          setIsLoading(false);
+        })
+    }
+    else setIsLoading(false);
+  }, [])
 
+  if (isLoading) return <Loader type="spin" color="#999999" />
 
   return (
     <BrowserRouter>
