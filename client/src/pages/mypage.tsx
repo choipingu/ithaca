@@ -62,6 +62,7 @@ import React, { useState, useEffect } from 'react';
 import { Link/* , useNavigate */ } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
+import { URL } from '../url';
 
 
 const MyPageWrap = styled.div`
@@ -90,7 +91,7 @@ const Info = styled.div`
   
 `;
 
-function MyPage () {
+function MyPage() {
   const [loading, setLoading] = useState(false);
   const [itemReviewed, setItemReviewed] = useState([]);
   const config = {
@@ -99,10 +100,19 @@ function MyPage () {
     },
     withCredentials: true
   };
-
-
-
-  // console.log(itemReviewed);
+  async function fetchData() {
+    try {
+      setLoading(true)
+      const res = await axios.get(`${URL}/user/test`, { withCredentials: true })
+      console.log(res)
+    } catch (e) {
+      console.log(e)
+    }
+    setLoading(false)
+  }
+  useEffect(() => {
+    fetchData()
+  }, [])
 
   return (
     <MyPageWrap>

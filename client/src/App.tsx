@@ -34,27 +34,21 @@ function App() {
   const cookies = new Cookies();
   const accessToken = cookies.get("accessToken")
   const dispatch = useAppDispatch()
-  const [isLoading, setIsLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (accessToken) {
-      axios.get(`${URL}/user`, config)
+      axios.get(`${URL}/user/test`, config)
         .then(el => {
+          console.log('main', el)
           dispatch(setLogin(true))
-          dispatch(setNickname(el.data.data.nickname))
-          if (el.data.data.kakao) {
-            dispatch(setOauth(true))
-          }
-          if (el.data.data.admin) {
-            dispatch(setAdmin(true))
-          }
-          setIsLoading(false);
-        })
+          setLoading(false);
+        }).catch(err => console.log(err))
     }
-    else setIsLoading(false);
+    else setLoading(false);
   }, [])
 
-  if (isLoading) return <Loader type="spin" color="#999999" />
+  if (loading) return <Loader type="spin" color="#999999" />
 
   return (
     <BrowserRouter>
