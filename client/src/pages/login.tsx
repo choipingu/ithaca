@@ -135,11 +135,9 @@ function Login() {
   };
 
   const handleSubmit = (event: any) => {
-    console.log(event.target);
     if (event.target.className.includes('loginBtn')) {
       axios.post(`${URL}/user/signin`, { userid: inputInfo.userid, password: inputInfo.password }, config)
         .then(el => {
-          console.log(el)
           dispatch(setLogin(true))
           navigate('/');
         }).catch(err => console.log(err))
