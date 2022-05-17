@@ -48,7 +48,7 @@ export class UserController {
         this.logger.log(`login user id ${JSON.stringify(userLoginDto.userid)}`)
         return this.userService.signIn(userLoginDto, res)
     }
-    @Get('/test')
+    @Post('/test')
     @UseGuards(AuthGuard())
     test(@GetUser() user: User) {
         return user
