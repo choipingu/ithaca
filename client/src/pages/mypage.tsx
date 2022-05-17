@@ -93,7 +93,6 @@ const Info = styled.div`
 
 function MyPage() {
   const [loading, setLoading] = useState(false);
-  const [itemReviewed, setItemReviewed] = useState([]);
   const config = {
     headers: {
       'Content-Type': 'application/json'
@@ -103,7 +102,7 @@ function MyPage() {
   async function fetchData() {
     try {
       setLoading(true)
-      const res = await axios.get(`${URL}/user/test`, { withCredentials: true })
+      const res = await axios.post(`${URL}/user/test`, { withCredentials: true })
       console.log(res)
     } catch (e) {
       console.log(e)
