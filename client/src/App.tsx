@@ -14,6 +14,8 @@ import { URL } from './url';
 import { useAppSelector, useAppDispatch } from './store/hooks'
 import { setAdmin, setLogin, setNickname, setOauth } from './features/info';
 import Loader from './components/loader';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const Container = styled.div`
     background: whitesmoke;
@@ -37,6 +39,7 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    AOS.init();
     if (accessToken) {
       axios.get(`${URL}/user/test`, config)
         .then(el => {
