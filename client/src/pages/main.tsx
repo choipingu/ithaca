@@ -11,8 +11,14 @@ const Title = styled.div`
 
 
 `
+const ImgTag = styled.img`
+    transform: translate(50px, 50px) rotate(360deg);
+    transition-property: all;
+    transition-duration: 2s;
+    transition-delay: 1s;
+`
 const Title2 = styled.div`
-    transform: translate(300px, 300px) rotate(180deg);
+    transform: translate(50px, 50px) rotate(360deg);
     transition-property: all;
     transition-duration: 2s;
     transition-delay: 1s;
@@ -28,7 +34,7 @@ function Main() {
                 data-aos-delay="50"
                 data-aos-duration="1000"
                 data-aos-easing="ease-out">
-                <img src='img/ithaca.png' alt="logo" width={500}></img>
+                <ImgTag src='img/ithaca.png' alt="logo" width={500}></ImgTag>
                 북카페 이타카 입니다.
                 <Title2>ithaca</Title2>
             </Title>
