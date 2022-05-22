@@ -1,28 +1,24 @@
 import styled from "styled-components"
 const Container = styled.div`
-    /* flex: 1; */
+    flex: 1;
+    background-color: #FBF7F2;
     
 `
 const Title = styled.div`
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    padding-right: 100px;
     display: flex;
+`
+const SubTitle = styled.div`
+    font-size: 30px;
+    font-weight: bolder;
+`
+const SubTitle2 = styled.div`
+    font-size: 20px;
+`
 
 
-`
-const ImgTag = styled.img`
-    transform: translate(50px, 50px) rotate(360deg);
-    transition-property: all;
-    transition-duration: 2s;
-    transition-delay: 1s;
-`
-const Title2 = styled.div`
-    transform: translate(50px, 50px) rotate(360deg);
-    transition-property: all;
-    transition-duration: 2s;
-    transition-delay: 1s;
-`
 
 function Main() {
 
@@ -30,13 +26,16 @@ function Main() {
 
     return (
         <Container>
-            <Title data-aos="fade-up"
+            {/* <Title data-aos="fade-up"
                 data-aos-delay="50"
                 data-aos-duration="1000"
                 data-aos-easing="ease-out">
                 <ImgTag src='img/ithaca.png' alt="logo" width={500}></ImgTag>
                 북카페 이타카 입니다.
-                <Title2>ithaca</Title2>
+            </Title> */}
+            <Title>
+                <SubTitle>북카페 이타카 입니다.<SubTitle2>도서현황을 확인 할 수 있습니다.</SubTitle2></SubTitle>
+                <img src='img/ithaca.png' alt="logo" width={500}></img>
             </Title>
         </Container>
 
