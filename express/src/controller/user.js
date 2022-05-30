@@ -1,4 +1,4 @@
-
+import { signToken } from "../middleware/signToken";
 const login = async (req, res) => {
     const { userId, password } = req.body;
     const userIdFind = await user.findOne({ where: { userId } })
@@ -17,8 +17,9 @@ const login = async (req, res) => {
             createdAt: userIdFind.createdAt,
             updatedAt: userIdFind.updatedAt
         };
-        // const accessToken = sign(payload, process.env.ACCESS_SECRET, { expiresIn: '10m' });
+        const accessToken = await signToken(payload)
         res.cookie('accessToken', accessToken);
         res.status(200).json({ data: payload, message: 'login success' });
     }
 }
+export default { login }
