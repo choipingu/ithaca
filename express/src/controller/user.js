@@ -1,5 +1,6 @@
 import user from "../../models/user";
 import { signToken } from "../middleware/signToken";
+import { verifyToken } from "../middleware/verifyToken";
 const signup = async (req, res) => {
     const { userId, nickname, password } = req.body;
     const userData = await user.findOne({ where: { userId } })
@@ -49,5 +50,21 @@ const login = async (req, res) => {
 const logout = async (req, res) => {
     return res.clearCookie('accessToken').status(205).json({ message: 'Logout Success' })
 }
+const editUser = async (req, res) => {
+    const { nickname, password } = req.body;
+    const verify = await verifyToken(req, res)
 
-export default { login, logout, signup }
+    if (!verify) return res.status(403).json({ message: 'Invalid Accesstoken' })
+
+    const userInfo = await user.findOne({
+        where: { id: verify.userInfo.id }
+    })
+
+    userInfo.nickname = nickname || userInfo.nickname;
+    userInfo.password = password || userInfo.password;
+
+
+    return res.status(200).json({ data: userInfo })
+};
+
+export default { login, logout, signup, editUser }
