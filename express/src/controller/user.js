@@ -50,7 +50,7 @@ const login = async (req, res) => {
 const logout = async (req, res) => {
     return res.clearCookie('accessToken').status(205).json({ message: 'Logout Success' })
 }
-const editUser = async (req, res) => {
+const edit = async (req, res) => {
     const { nickname, password } = req.body;
     const verify = await verifyToken(req, res)
 
@@ -66,5 +66,38 @@ const editUser = async (req, res) => {
 
     return res.status(200).json({ data: userInfo })
 };
+const check = async (req, res) => {
+    const { userId, nickname, password } = req.body;
 
-export default { login, logout, signup, editUser }
+    if (userId) {
+        const userInfo = await user.findOne({ where: userId });
+        if (userInfo) {
+            return res.status(200).json({ message: 'Account already exisits' })
+        }
+        return res.status(200).json({ message: 'userId available' })
+    }
+
+    if (password) {
+        const verify = await authorizeToken(req, res);
+        if (!verify) return res.status(200).json({ message: 'Invalid Accesstoken' })
+
+        const userInfo = await user.findOne({ where: verify.userInfo.userId });
+
+        if (userInfo.password === password) {
+            return res.status(200).json({ message: 'password correct!' });
+        } else {
+            return res.status(200).json({ message: 'incorrect password' })
+        }
+    }
+
+    if (nickname) {
+        const userInfo = await userRepository.findOne({ nickname: nickname });
+        if (userInfo) {
+            return res.status(200).json({ message: 'nickname already exisits' })
+        }
+        return res.status(200).json({ message: 'nickname available' })
+    }
+
+    return res.status(404).json({ message: 'Bad Request' })
+};
+export default { login, logout, signup, edit }
