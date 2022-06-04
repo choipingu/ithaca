@@ -91,7 +91,7 @@ const check = async (req, res) => {
     }
 
     if (nickname) {
-        const userInfo = await userRepository.findOne({ nickname: nickname });
+        const userInfo = await user.findOne({ nickname: nickname });
         if (userInfo) {
             return res.status(200).json({ message: 'nickname already exisits' })
         }
@@ -116,4 +116,17 @@ const deleteUser = async (req, res) => {
         .status(200)
         .json({ message: 'Deleted' })
 };
-export default { login, logout, signup, edit, deleteUser }
+const getUser = async (req, res) => {
+    const verify = await verifyToken(req, res)
+
+    if (verify) {
+        const userInfo = await user.findOne({
+            where: { id: verify.userInfo.id }
+        })
+
+        return res.status(201).json({ data: { ...userInfo, content: userContent } })
+    } else {
+        return res.status(400).json({ message: 'Invalid Accesstoken' })
+    }
+}
+export default { login, logout, signup, edit, deleteUser, getUser }
