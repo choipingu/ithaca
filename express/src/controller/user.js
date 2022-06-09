@@ -101,7 +101,6 @@ const check = async (req, res) => {
     return res.status(404).json({ message: 'Bad Request' })
 };
 const deleteUser = async (req, res) => {
-    console.log(req.headers)
     const verify = await verifyToken(req, res);
 
     if (!verify) return res.status(403).json({ message: 'Invalid Accesstoken' })
@@ -109,7 +108,7 @@ const deleteUser = async (req, res) => {
     const targetUser = await user.findOne(verify.userInfo.id);
 
     targetUser.nickname = '';
-    targetUser.email = '';
+    targetUser.userId = '';
     targetUser.password = '';
     return res
         .clearCookie('accessToken')
@@ -133,7 +132,7 @@ const checkInfo = async (req, res) => {
     const { userId, nickname, password } = req.body;
 
     if (userId) {
-        const userInfo = await userRepository.findOne({ email: email });
+        const userInfo = await user.findOne({ userId: userId });
         if (userInfo) {
             return res.status(200).json({ message: 'Account already exisits' })
         }
@@ -144,7 +143,7 @@ const checkInfo = async (req, res) => {
         const verify = await verifyToken(req, res);
         if (!verify) return res.status(200).json({ message: 'Invalid Accesstoken' })
 
-        const userInfo = await user.findOne({ email: verify.userInfo.email });
+        const userInfo = await user.findOne({ userId: verify.userInfo.userId });
 
         if (userInfo.password === password) {
             return res.status(200).json({ message: 'password correct!' });
@@ -163,4 +162,4 @@ const checkInfo = async (req, res) => {
 
     return res.status(404).json({ message: 'Bad Request' })
 };
-export default { login, logout, signup, edit, deleteUser, getUser, checkInfo }
+export default { login, logout, signup, edit, deleteUser, getUser, checkInfo, check }
