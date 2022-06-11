@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useState } from 'react'
-import {URL} from '../url'
+import { URL } from '../url'
 
 function Post() {
 
@@ -22,25 +22,17 @@ function Post() {
             setPost({ ...post, main: e.target.value })
         }
     }
-    const getJoin = async () => {
-        const user1 = await axios.get(`${URL}/join`, config)
-
-        console.log(user1.data.data)
-    }
 
     const submitPost = async () => {
         await axios.post(`${URL}/posting`, post, config)
     }
-    console.log(post)
 
     return (
         <div>
             <div>Post</div>
-            <input placeholder="title" value={post.title} onChange={onChange1}></input>
+            <input placeholder="name" value={post.title} onChange={onChange1}></input>
             <input placeholder="main" value={post.main} onChange={onChange1}></input>
-            <button onClick={submitPost}>posting!</button>
-            <br />
-            <button onClick={getJoin}>contentjoin</button>
+            <button onClick={submitPost}>책등록</button>
         </div>
     )
 }
