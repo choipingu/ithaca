@@ -122,8 +122,7 @@ const getUser = async (req, res) => {
         const userInfo = await user.findOne({
             where: { id: verify.userInfo.id }
         })
-
-        return res.status(201).json({ data: { ...userInfo, content: userContent } })
+        return res.status(201).json({ data: { ...userInfo } })
     } else {
         return res.status(400).json({ message: 'Invalid Accesstoken' })
     }
