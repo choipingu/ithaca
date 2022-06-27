@@ -1,0 +1,65 @@
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { ImHome } from "react-icons/im"
+import { BsBookmarkStarFill as BookMark } from "react-icons/bs"
+import { BiBookOpen as BookList } from "react-icons/bi"
+
+
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    background-color: #2e4361;
+    width: 11%;
+`
+const Logo = styled.div`
+    font-size: 1.5rem;
+    
+    :hover{
+        cursor: pointer;
+    }
+`
+
+const Menu = styled.ul`
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding-left: 0;
+`
+const MenuLi = styled.li`
+    font-size: 16px;
+    padding: 15px 15px 15px 15px;
+    border-bottom: 1px solid gray;
+    :hover{
+        cursor: pointer;
+        background-color: #4b6385;
+    }
+`
+const Icon = styled.ul`
+    display: flex;
+    font-size: 1.5rem;    
+    padding: 8px 12px;
+`
+const IconLi = styled.li`
+    font-size: 1.2rem;
+    padding: 8px 12px;
+`
+const StlyeLink = styled(Link)`
+    margin-left: 5px;
+`
+
+function Nav() {
+
+
+
+    return (
+        <Container>
+            <Menu>
+                <MenuLi><ImHome color='white' /><StlyeLink to='/signup'>홈</StlyeLink></MenuLi>
+                <MenuLi><BookMark color='white' /><StlyeLink to='/post'>추천도서</StlyeLink></MenuLi>
+                <MenuLi><BookList color='white' /><StlyeLink to='/post'>도서목록</StlyeLink></MenuLi>s
+            </Menu>
+        </Container>
+    )
+}
+
+export default Nav

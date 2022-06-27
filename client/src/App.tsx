@@ -3,6 +3,7 @@ import SignUp from './pages/signup';
 import Post from './pages/post';
 import Nav from './components/nav';
 import Main from './pages/main';
+import SideNav from './components/sidenav'
 import Mypage from './pages/mypage';
 import Login from './pages/login';
 import Footer from './components/footer';
@@ -20,7 +21,7 @@ import 'aos/dist/aos.css';
 const Container = styled.div`
     background: whitesmoke;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     min-height: 100vh;
   
 `
@@ -55,8 +56,9 @@ function App() {
 
   return (
     <BrowserRouter>
+      <Nav />
       <Container>
-        <Nav />
+        <SideNav />
         <Routes>
           <Route path='/' element={<Main />} />
           <Route path='/mypage' element={<Mypage />} />
