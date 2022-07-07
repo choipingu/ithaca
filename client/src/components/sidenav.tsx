@@ -24,6 +24,7 @@ const Menu = styled.ul`
     flex-direction: column;
     list-style: none;
     padding-left: 0;
+    
 `
 const MenuLi = styled.li`
     font-size: 16px;
@@ -34,16 +35,7 @@ const MenuLi = styled.li`
         background-color: #4b6385;
     }
 `
-const Icon = styled.ul`
-    display: flex;
-    font-size: 1.5rem;    
-    padding: 8px 12px;
-`
-const IconLi = styled.li`
-    font-size: 1.2rem;
-    padding: 8px 12px;
-`
-const StlyeLink = styled(Link)`
+const Space = styled.a`
     margin-left: 5px;
 `
 
@@ -54,9 +46,9 @@ function Nav() {
     return (
         <Container>
             <Menu>
-                <MenuLi><ImHome color='white' /><StlyeLink to='/signup'>홈</StlyeLink></MenuLi>
-                <MenuLi><BookMark color='white' /><StlyeLink to='/post'>추천도서</StlyeLink></MenuLi>
-                <MenuLi><BookList color='white' /><StlyeLink to='/post'>도서목록</StlyeLink></MenuLi>s
+                <Link to='/signup'><MenuLi><ImHome color='white' /><Space>홈</Space></MenuLi></Link>
+                <Link to='/post'><MenuLi><BookMark color='white' /><Space>추천도서</Space></MenuLi></Link>
+                <Link to='/post'><MenuLi><BookList color='white' /><Space>도서목록</Space></MenuLi></Link>
             </Menu>
         </Container>
     )

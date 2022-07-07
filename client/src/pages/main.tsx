@@ -26,13 +26,6 @@ function Main() {
 
     return (
         <Container>
-            {/* <Title data-aos="fade-up"
-                data-aos-delay="50"
-                data-aos-duration="1000"
-                data-aos-easing="ease-out">
-                <ImgTag src='img/ithaca.png' alt="logo" width={500}></ImgTag>
-                북카페 이타카 입니다.
-            </Title> */}
             <Title>
                 <SubTitle>북카페 이타카 입니다.<SubTitle2>도서현황을 확인 할 수 있습니다.</SubTitle2></SubTitle>
                 <img src='img/ithaca.png' alt="logo" width={500}></img>
