@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import styled from 'styled-components';
 import { URL } from '../url'
-import { useAppSelector, useAppDispatch } from '../store/hooks'
+import { useAppDispatch } from '../store/hooks'
 import { setLogin } from '../features/info';
 
 
@@ -17,8 +17,8 @@ const LoginWrap = styled.div`
   background-color: whitesmoke;
 `;
 const LoginContainer = styled.div`
-  width: 300px;
-  height: 570px;
+  width: 400px;
+  height: 800px;
   background-color: white;
   display: flex;
   justify-content: center;
@@ -27,7 +27,7 @@ const LoginContainer = styled.div`
   border-radius: 10px;
   border: 2px solid #F1F1F1;
   .img {
-    height: 250px;
+    height: 400px;
   }
   div {
     width: 100%;
@@ -109,6 +109,10 @@ const GithubButton = styled.button`
     }
 `;
 
+const Logo = styled.img`
+  height: 100px;
+`
+
 function Login() {
   const config = {
     headers: {
@@ -156,7 +160,7 @@ function Login() {
   return (
     <LoginWrap>
       <LoginContainer>
-        <img src='img/ithaca.png' alt='logo' className='img' />
+        <Logo src='img/ithaca.png' alt='logo' className='img' />
         <InputWrap>
           <LoginInput type='text' placeholder='userid' onChange={handleInput} />
           <LoginInput type='password' placeholder='password' onChange={handleInput} />

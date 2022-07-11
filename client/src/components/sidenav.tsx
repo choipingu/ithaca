@@ -46,7 +46,7 @@ function Nav() {
     return (
         <Container>
             <Menu>
-                <Link to='/signup'><MenuLi><ImHome color='white' /><Space>홈</Space></MenuLi></Link>
+                <Link to='/'><MenuLi><ImHome color='white' /><Space>홈</Space></MenuLi></Link>
                 <Link to='/post'><MenuLi><BookMark color='white' /><Space>추천도서</Space></MenuLi></Link>
                 <Link to='/post'><MenuLi><BookList color='white' /><Space>도서목록</Space></MenuLi></Link>
             </Menu>
