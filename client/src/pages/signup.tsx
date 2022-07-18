@@ -4,7 +4,7 @@ import { URL } from '../url'
 
 function SignUp() {
   const [info, setInfo] = useState({
-    userid: '',
+    userId: '',
     nickname: '',
     password: ''
   })
@@ -14,7 +14,7 @@ function SignUp() {
   }
   const onChange = (e: any) => {
     if (e.target.placeholder === 'userid') {
-      setInfo({ ...info, userid: e.target.value })
+      setInfo({ ...info, userId: e.target.value })
     }
     if (e.target.placeholder === 'nickname') {
       setInfo({ ...info, nickname: e.target.value })
@@ -30,7 +30,7 @@ function SignUp() {
   return (
     <div>
       <div>SignUp</div>
-      <input placeholder="userid" value={info.userid} onChange={onChange}></input>
+      <input placeholder="userid" value={info.userId} onChange={onChange}></input>
       <input placeholder="nickname" type='text' value={info.nickname} onChange={onChange}></input>
       <input placeholder="password" type='password' value={info.password} onChange={onChange}></input>
       <button onClick={submitSign}>signup!</button>

@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { URL } from '../url';
 import Loader from '../components/loader'
-import { userInfo } from 'os';
 
 
 function MyPage() {
@@ -26,14 +25,16 @@ function MyPage() {
     }
     setLoading(false)
   }
+
   useEffect(() => {
     fetchData()
   }, [])
+
   if (loading) return <Loader type="spin" color="#999999" />
 
   return (
     <div>
-
+      마이 페이지 입니다.
     </div>
   );
 }
