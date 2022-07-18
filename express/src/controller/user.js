@@ -1,6 +1,6 @@
-import user from "../../models/user";
-import { signToken } from "../middleware/signToken";
-import { verifyToken } from "../middleware/verifyToken";
+import { user } from "../../models/user";
+import { signToken } from "../middleware/signToken.js";
+import { verifyToken } from "../middleware/verifyToken.js";
 const signup = async (req, res) => {
     const { userId, nickname, password } = req.body;
     const userData = await user.findOne({ where: { userId } })
